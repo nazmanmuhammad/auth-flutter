@@ -1,4 +1,4 @@
-package com.example.authentification
+package com.example_loginapp
 
 import io.flutter.embedding.android.FlutterActivity
 

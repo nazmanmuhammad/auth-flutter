@@ -59,15 +59,15 @@ class _HomePageState extends State<HomePage> {
               children: <Widget>[
                 SizedBox(height: 40.0),
                 Container(
-                  height: 300,
+                  height: 500,
                   child: Image(
-                    image: AssetImage("images/welcome.jpg"),
+                    image: AssetImage("images/logo3.jpg"),
                     fit: BoxFit.contain,
                   ),
                 ),
                 Container(
                   child: Text(
-                    "Hello ${user.displayName} you are Logged in as ${user.email}",
+                    "Selamat Datang, Kamu Login sebagai ${user.email}",
                     style:
                         TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
                   ),
@@ -75,12 +75,12 @@ class _HomePageState extends State<HomePage> {
                 RaisedButton(
                   padding: EdgeInsets.fromLTRB(70, 10, 70, 10),
                   onPressed: signOut,
-                  child: Text('Signout',
+                  child: Text('Keluar',
                       style: TextStyle(
                           color: Colors.white,
                           fontSize: 20.0,
                           fontWeight: FontWeight.bold)),
-                  color: Colors.orange,
+                  color: Colors.redAccent,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20.0),
                   ),

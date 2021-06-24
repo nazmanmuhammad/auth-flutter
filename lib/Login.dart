@@ -1,6 +1,8 @@
+import 'package:authentification/Reset.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'SignUp.dart';
+import 'verify.dart';
 
 class Login extends StatefulWidget {
   @override
@@ -35,7 +37,10 @@ class _LoginState extends State<Login> {
 
       try {
         await _auth.signInWithEmailAndPassword(
-            email: _email, password: _password);
+            email: _email, password: _password).then((_) {
+          Navigator.of(context).pushReplacement(
+              MaterialPageRoute(builder: (context) => VerifyScreen()));
+        });
       } catch (e) {
         showError(e.message);
         print(e);
@@ -48,8 +53,8 @@ class _LoginState extends State<Login> {
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            title: Text('ERROR'),
-            content: Text(errormessage),
+            title: Text('Kesalahan'),
+            content: Text('Gunakan Email yang Valid'),
             actions: <Widget>[
               FlatButton(
                   onPressed: () {
@@ -68,14 +73,14 @@ class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: SingleChildScrollView(
+      body: SingleChildScrollView(
       child: Container(
         child: Column(
           children: <Widget>[
             Container(
               height: 400,
               child: Image(
-                image: AssetImage("images/login.jpg"),
+                image: AssetImage("images/logo2.jpg"),
                 fit: BoxFit.contain,
               ),
             ),
@@ -98,7 +103,7 @@ class _LoginState extends State<Login> {
                       child: TextFormField(
                           validator: (input) {
                             if (input.length < 6)
-                              return 'Provide Minimum 6 Character';
+                              return 'Minimal 6 karakter';
                           },
                           decoration: InputDecoration(
                             labelText: 'Password',
@@ -111,14 +116,14 @@ class _LoginState extends State<Login> {
                     RaisedButton(
                       padding: EdgeInsets.fromLTRB(70, 10, 70, 10),
                       onPressed: login,
-                      child: Text('LOGIN',
+                      child: Text('Masuk',
                           style: TextStyle(
                               color: Colors.white,
                               fontSize: 20.0,
                               fontWeight: FontWeight.bold)),
-                      color: Colors.orange,
+                      color: Colors.redAccent,
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20.0),
+                        borderRadius: BorderRadius.circular(10.0),
                       ),
                     )
                   ],
@@ -126,12 +131,19 @@ class _LoginState extends State<Login> {
               ),
             ),
             GestureDetector(
-              child: Text('Create an Account?'),
+              child: Text('Belum punya akun?'),
               onTap: navigateToSignUp,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                TextButton(child: Text('Lupa Password?'),onPressed: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => ResetScreen())),)
+              ],
             )
           ],
         ),
       ),
-    ));
+    )
+    );
   }
 }
